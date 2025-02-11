@@ -48,7 +48,7 @@ export default function Navbar() {
           {/* Call-to-Action Button */}
           <Link
             to="/pricing"
-            className="hidden md:block bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full transition-all transform hover:scale-105"
+            className="md:block bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full transition-all transform hover:scale-105"
           >
             Get Started
           </Link>

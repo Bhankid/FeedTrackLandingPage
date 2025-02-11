@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Utensils, CreditCard, Calendar, Shield, BarChart3 } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer'
 
 export default function Home() {
   return (
@@ -19,8 +20,9 @@ export default function Home() {
               </span>
             </h1>
             <p className="text-gray-300 text-lg mb-8">
-              Streamline your school's meal program with our advanced feeding fee management system.
-              Track payments, manage credits, and ensure efficient meal service delivery.
+              Streamline your school's meal program with our advanced feeding
+              fee management system. Track payments, manage credits, and ensure
+              efficient meal service delivery.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
@@ -38,8 +40,8 @@ export default function Home() {
             </div>
           </div>
           <div className="flex-1">
-            <img 
-              src="https://images.unsplash.com/photo-1594708767771-a7502209ff51?auto=format&fit=crop&q=80"
+            <img
+              src="https://i.postimg.cc/Y9ttXzJw/R.jpg"
               alt="School cafeteria"
               className="rounded-2xl shadow-2xl border border-purple-500/20"
             />
@@ -58,34 +60,41 @@ export default function Home() {
               {
                 icon: <CreditCard className="w-8 h-8 text-purple-400" />,
                 title: "Advanced Payment System",
-                description: "Handle prepayments and daily deductions automatically"
+                description:
+                  "Handle prepayments and daily deductions automatically",
               },
               {
                 icon: <Calendar className="w-8 h-8 text-purple-400" />,
                 title: "Flexible Scheduling",
-                description: "Manage regular and irregular eating patterns effortlessly"
+                description:
+                  "Manage regular and irregular eating patterns effortlessly",
               },
               {
                 icon: <Shield className="w-8 h-8 text-purple-400" />,
                 title: "Verification System",
-                description: "Ensure accurate attendance and payment tracking"
+                description: "Ensure accurate attendance and payment tracking",
               },
               {
                 icon: <BarChart3 className="w-8 h-8 text-purple-400" />,
                 title: "Real-time Analytics",
-                description: "Monitor payments and meal service patterns"
+                description: "Monitor payments and meal service patterns",
               },
               {
                 icon: <Utensils className="w-8 h-8 text-purple-400" />,
                 title: "Credit Management",
-                description: "Track and manage delayed payments efficiently"
-              }
+                description: "Track and manage delayed payments efficiently",
+              },
             ].map((feature, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 hover:bg-white/10 transition-all">
+              <div
+                key={index}
+                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 hover:bg-white/10 transition-all"
+              >
                 <div className="bg-purple-900/50 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  {feature.title}
+                </h3>
                 <p className="text-gray-400">{feature.description}</p>
               </div>
             ))}
@@ -107,6 +116,7 @@ export default function Home() {
           </Link>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
