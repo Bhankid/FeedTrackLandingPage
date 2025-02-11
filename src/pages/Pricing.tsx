@@ -1,12 +1,13 @@
-import React from 'react';
-import { Check } from 'lucide-react';
-import Navbar from '../components/Navbar';
+import React from "react";
+import { Check } from "lucide-react";
+import { Link } from "react-router-dom"; // Import Link for navigation
+import Navbar from "../components/Navbar";
 
 export default function Pricing() {
   const plans = [
     {
       name: "Basic",
-      price: "$49",
+      price: "GH₵149",
       period: "per month",
       description: "Perfect for small schools",
       features: [
@@ -14,13 +15,13 @@ export default function Pricing() {
         "Basic payment tracking",
         "Daily attendance records",
         "Email support",
-        "Basic reporting"
+        "Basic reporting",
       ],
-      highlighted: false
+      highlighted: false,
     },
     {
       name: "Professional",
-      price: "$99",
+      price: "GH₵199",
       period: "per month",
       description: "Ideal for growing institutions",
       features: [
@@ -30,13 +31,13 @@ export default function Pricing() {
         "Priority support",
         "Advanced analytics",
         "Custom reports",
-        "Multiple payment methods"
+        "Multiple payment methods",
       ],
-      highlighted: true
+      highlighted: true,
     },
     {
       name: "Enterprise",
-      price: "$199",
+      price: "GH₵299",
       period: "per month",
       description: "For large educational institutions",
       features: [
@@ -47,16 +48,16 @@ export default function Pricing() {
         "Advanced security",
         "API access",
         "Dedicated account manager",
-        "Custom branding"
+        "Custom branding",
       ],
-      highlighted: false
-    }
+      highlighted: false,
+    },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
       <Navbar />
-      
+
       <div className="pt-32 pb-20 px-6">
         <div className="container mx-auto">
           <div className="text-center mb-16">
@@ -64,18 +65,18 @@ export default function Pricing() {
               Choose Your Plan
             </h1>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Select the perfect plan for your school's needs. All plans include our core features with different levels of support and capacity.
+              Select the perfect plan for your school's needs. All plans include
+              our core features with different levels of support and capacity.
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {plans.map((plan, index) => (
               <div
                 key={index}
                 className={`rounded-2xl p-8 ${
                   plan.highlighted
-                    ? 'bg-gradient-to-b from-purple-600 to-purple-900 border-2 border-purple-400 transform scale-105'
-                    : 'bg-white/5 backdrop-blur-sm'
+                    ? "bg-gradient-to-b from-purple-600 to-purple-900 border-2 border-purple-400 transform scale-105"
+                    : "bg-white/5 backdrop-blur-sm"
                 } relative overflow-hidden transition-all hover:transform hover:scale-[1.02]`}
               >
                 {plan.highlighted && (
@@ -83,28 +84,34 @@ export default function Pricing() {
                     Popular
                   </div>
                 )}
-                
-                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  {plan.name}
+                </h3>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold text-white">{plan.price}</span>
+                  <span className="text-4xl font-bold text-white">
+                    {plan.price}
+                  </span>
                   <span className="text-gray-400 ml-2">{plan.period}</span>
                 </div>
                 <p className="text-gray-300 mb-6">{plan.description}</p>
-                
+
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-gray-300">
+                    <li
+                      key={featureIndex}
+                      className="flex items-center text-gray-300"
+                    >
                       <Check className="w-5 h-5 text-purple-400 mr-2" />
                       {feature}
                     </li>
                   ))}
                 </ul>
-
                 <button
                   className={`w-full py-3 px-6 rounded-full font-semibold transition-all ${
                     plan.highlighted
-                      ? 'bg-white text-purple-900 hover:bg-gray-100'
-                      : 'bg-purple-600 text-white hover:bg-purple-700'
+                      ? "bg-white text-purple-900 hover:bg-gray-100"
+                      : "bg-purple-600 text-white hover:bg-purple-700"
                   }`}
                 >
                   Get Started
@@ -112,14 +119,17 @@ export default function Pricing() {
               </div>
             ))}
           </div>
-
           <div className="mt-16 text-center">
             <p className="text-gray-400 mb-4">
-              Need a custom plan? Contact our sales team for a tailored solution.
+              Need a custom plan? Contact our sales team for a tailored
+              solution.
             </p>
-            <button className="text-purple-400 hover:text-purple-300 font-semibold">
-              Contact Sales →
-            </button>
+            {/* Updated Button */}
+            <Link to="/contact">
+              <button className="text-purple-400 hover:text-purple-300 font-semibold">
+                Contact Sales →
+              </button>
+            </Link>
           </div>
         </div>
       </div>
