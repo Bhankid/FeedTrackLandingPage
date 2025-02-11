@@ -26,7 +26,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
-                to="/pricing"
+                to="/contact"
                 className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all transform hover:scale-105"
               >
                 Request Demo
@@ -117,7 +117,7 @@ export default function Home() {
         </div>
       </div>
       <div className="hidden  md:block">
-      <Footer />
+        <Footer />
       </div>
     </div>
   );
