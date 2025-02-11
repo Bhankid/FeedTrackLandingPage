@@ -1,6 +1,6 @@
 import React from "react";
 import { Check } from "lucide-react";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 export default function Pricing() {
@@ -54,10 +54,29 @@ export default function Pricing() {
     },
   ];
 
+  const navigate = useNavigate();
+
+  // Handle navigation to the payment page
+  interface Plan {
+    name: string;
+    price: string;
+    period: string;
+    description: string;
+    features: string[];
+    highlighted: boolean;
+  }
+
+  const handleGetStarted = (plan: Plan): void => {
+    navigate(
+      `/PaymentPage?plan=${encodeURIComponent(
+        plan.name
+      )}&price=${encodeURIComponent(plan.price)}`
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
       <Navbar />
-
       <div className="pt-32 pb-20 px-6">
         <div className="container mx-auto">
           <div className="text-center mb-16">
@@ -84,7 +103,6 @@ export default function Pricing() {
                     Popular
                   </div>
                 )}
-
                 <h3 className="text-2xl font-bold text-white mb-2">
                   {plan.name}
                 </h3>
@@ -95,7 +113,6 @@ export default function Pricing() {
                   <span className="text-gray-400 ml-2">{plan.period}</span>
                 </div>
                 <p className="text-gray-300 mb-6">{plan.description}</p>
-
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, featureIndex) => (
                     <li
@@ -108,6 +125,7 @@ export default function Pricing() {
                   ))}
                 </ul>
                 <button
+                  onClick={() => handleGetStarted(plan)}
                   className={`w-full py-3 px-6 rounded-full font-semibold transition-all ${
                     plan.highlighted
                       ? "bg-white text-purple-900 hover:bg-gray-100"
