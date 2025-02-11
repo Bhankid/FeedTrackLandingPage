@@ -66,13 +66,13 @@ export default function Pricing() {
     highlighted: boolean;
   }
 
-  const handleGetStarted = (plan: Plan): void => {
-    navigate(
-      `/PaymentPage?plan=${encodeURIComponent(
-        plan.name
-      )}&price=${encodeURIComponent(plan.price)}`
-    );
-  };
+const handleGetStarted = (plan: Plan): void => {
+  navigate(
+    `/PaymentPage?plan=${encodeURIComponent(
+      plan.name
+    )}&price=${encodeURIComponent(plan.price)}`
+  );
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">

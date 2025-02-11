@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import PaystackPop from "@paystack/inline-js"; // Ensure correct Paystack import
 import Navbar from "../components/Navbar";
+import { useLocation } from "react-router-dom";
 
 const PaymentPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
-  const [selectedPlan, setSelectedPlan] = useState<string>("Starter");
+  const [selectedPlan, setSelectedPlan] = useState<string>("Basic");
   const [amountState, setAmount] = useState<number>(149);
   const [paystackInstance, setPaystackInstance] = useState<PaystackPop | null>(
     null
@@ -18,13 +19,26 @@ const PaymentPage: React.FC = () => {
     { name: "Enterprise", amount: 299 },
   ];
 
+  // Extract query parameters
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const planFromQuery = queryParams.get("plan");
+  const priceFromQuery = queryParams.get("price");
+
   // Initialize Paystack instance
   useEffect(() => {
     const paystack = new PaystackPop();
     setPaystackInstance(paystack);
-    
+
     console.log("Paystack Key:", import.meta.env.VITE_PAYSTACK_PUBLIC_KEY);
-  }, []);
+
+    // Pre-select the plan based on query parameters
+    if (planFromQuery && priceFromQuery) {
+      const parsedPrice = parseInt(priceFromQuery.replace("GH₵", ""), 10); // Remove "GH₵" and parse as number
+      setSelectedPlan(planFromQuery);
+      setAmount(parsedPrice);
+    }
+  }, [planFromQuery, priceFromQuery]);
 
   // Handle plan selection
   const handlePlanChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -44,7 +58,6 @@ const PaymentPage: React.FC = () => {
       });
       return;
     }
-
     if (!email) {
       Swal.fire({
         icon: "error",
@@ -53,7 +66,6 @@ const PaymentPage: React.FC = () => {
       });
       return;
     }
-
     Swal.fire({
       title: "Confirm Payment",
       text: `You are about to pay GHS ${amountState} for the ${selectedPlan} plan. Proceed?`,
@@ -81,11 +93,10 @@ const PaymentPage: React.FC = () => {
       });
       return;
     }
-
     paystackInstance?.newTransaction({
       key: publicKey,
       email,
-      amount: amountState * 100, 
+      amount: amountState * 100, // Convert to kobo
       currency: "GHS",
       metadata: {
         custom_fields: [
@@ -126,7 +137,6 @@ const PaymentPage: React.FC = () => {
               Enter your email, select a plan, and proceed with payment.
             </p>
           </div>
-
           <form className="bg-white/5 backdrop-blur-lg rounded-xl p-8 space-y-6">
             {/* Email Input */}
             <div>
@@ -141,7 +151,6 @@ const PaymentPage: React.FC = () => {
                 required
               />
             </div>
-
             {/* Plan Selection */}
             <div>
               <label className="block text-sm font-medium mb-2 text-gray-400">
@@ -159,7 +168,6 @@ const PaymentPage: React.FC = () => {
                 ))}
               </select>
             </div>
-
             {/* Amount Field (Auto-updated with selected plan) */}
             <div>
               <label className="block text-sm font-medium mb-2 text-gray-400">
@@ -172,7 +180,6 @@ const PaymentPage: React.FC = () => {
                 disabled
               />
             </div>
-
             {/* Pay Now Button */}
             <button
               type="button"
