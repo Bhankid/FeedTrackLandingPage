@@ -4,7 +4,7 @@ import { HomeIcon, ListChecksIcon, StarIcon, MailIcon } from "lucide-react";
 
 export default function MobileNav() {
   return (
-    <div className="md:hidden fixed bottom-0 left-0 w-full bg-black/20 backdrop-blur-lg shadow-lg z-50">
+    <div className="md:hidden fixed bottom-0 left-0 w-full bg-black/20 backdrop-blur-lg shadow-lg rounded-lg z-50">
       <div className="flex justify-around items-center h-16">
         {/* Home */}
         <Link
